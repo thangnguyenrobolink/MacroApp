@@ -1,0 +1,162 @@
+﻿<Window x:Class="MacroApp.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        xmlns:core="clr-namespace:MacroApp.Core;assembly=MacroApp.Core"
+        Title="Macro CNC for Sếp Mập" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip"
+        Focusable="False"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Normal"
+        TextElement.FontSize="14" Background="Transparent"
+        FontFamily="{materialDesign:MaterialDesignFont}"
+        WindowStyle="None" Height="727" Width="975">
+    <Border CornerRadius="30" MouseLeftButtonDown="Grid_MouseLeftButtonDown" Margin="0" Background="#FF152026">
+            <Grid materialDesign:ScrollViewerAssist.SupportHorizontalScroll="True" materialDesign:ScrollBarAssist.ButtonsVisibility="Visible" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <!--Status bar and window control button-->
+                <Grid Grid.Row="0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="260"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel  Grid.Column="0" Grid.Row="0"    x:Name="pnlControlBar"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Margin="0,0,2,0"
+                                MouseLeftButtonDown="PnlControlBar_MouseLeftButtonDown"
+                                MouseEnter="PnlControlBar_MouseEnter">
+                    <Button  IsTabStop="False" x:Name="btnClose" Style="{StaticResource MaterialDesignFlatButton}"
+                                Width="30" Height="30" Padding="0"
+                                Click="BtnClose_Click">
+                            <materialDesign:PackIcon Kind="Close" Foreground="White" 
+                                             Width="12"/>
+                        </Button>
+
+                    <Button  IsTabStop="False" x:Name="btnMaximize"  Style="{StaticResource MaterialDesignFlatButton}"
+                                 Width="30" Height="30" Padding="0"
+                                Click="BtnMaximize_Click" Foreground="White">
+                            <materialDesign:PackIcon Kind="Maximize" Width="12"/>
+                        </Button>
+
+                    <Button  IsTabStop="False" x:Name="btnMinimize"  Width="30" Height="30" Margin="0" Padding="0"
+                             Style="{StaticResource MaterialDesignFlatButton}"
+                            Click="BtnMinimize_Click" Foreground="White" >
+                            <materialDesign:PackIcon Kind="Minimize" Width="12"/>
+                        </Button>
+
+                    </StackPanel>
+                    <StackPanel  Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="4 0">
+                    <TextBlock Text="{Binding CurrentDate}" Foreground="White"
+                    Height="15" Width="72" TextAlignment="Center"
+                    FontSize="12" VerticalAlignment="Center" 
+                    HorizontalAlignment="Center"/>
+                    <TextBlock Text="{Binding CurrentTime}"   Foreground="White"
+                    Width="72" TextAlignment="Center"
+                    FontSize="12"  Height="15"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center" />
+
+                    </StackPanel>
+                    <Image Source="/Views/avatar_12.jpg" Grid.Column="1" Grid.RowSpan="2" Margin="6 0 -8 0"/>
+                    <TextBlock FontWeight="DemiBold" Text="Mạnh Toàn Ltd Co" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+                <TextBlock Text="Hoàng tử Đà Lạt" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"  Foreground="White"/>
+                    <Grid Grid.RowSpan="2" Grid.Column="3">
+                    <TextBlock FontSize="24" Text="MACRO CNC OKUMA" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"  Foreground="White"/>
+
+                    </Grid>
+                    <Grid Grid.RowSpan="2" Grid.Column="4">
+                        <Image Margin="0,2,8,2" Source="/Views/RoboLinks Logo.png"/>
+
+                    </Grid>
+                </Grid>
+                <!--Navigator and main content-->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <!--Navigator and User info-->
+                    <Grid Grid.Column="0" MinWidth="72" MaxWidth="164" x:Name="NavigationBar">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="74" />
+                            <!--<RowDefinition Height="150"/>-->
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <!--User info-->
+                        <Grid Grid.Row="0" Margin="0 12 0 45">
+                        <ToggleButton  IsTabStop="False" HorizontalAlignment="Left" VerticalAlignment="Center" Height="32" Margin="24,0" Foreground="#6E7783"
+                         Style="{StaticResource MaterialDesignHamburgerToggleButton}" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Unchecked" />
+                        </Grid>
+                        <!--User  info-->
+                        <Border Grid.Row="1"  CornerRadius="0 40 0 25">
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="535.2,535.2" StartPoint="1,1" MappingMode="Absolute" SpreadMethod="Reflect">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform X="0"/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF152026"/>
+                                    <GradientStop Color="#5F91AA" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <Grid>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="45"/>
+                                    <RowDefinition Height="45"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment ="Left" Width="164">
+                                    <RadioButton VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                Style="{StaticResource menuButton}"
+                                Tag="Orange"
+                                Command="{Binding NavigateCommand}"  CommandParameter="MacroView">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                            <materialDesign:PackIcon Margin="20,0"  Width="32"  Height="24" Kind="MonitorDashboard" />
+                                            <TextBlock VerticalAlignment="Center" Text="Macro" />
+                                        </StackPanel>
+                                    </RadioButton>
+
+                                    <RadioButton HorizontalAlignment ="Stretch"
+                                     Style="{StaticResource menuButton}"
+                                Tag="Orange"
+                                Command="{Binding NavigateCommand}"  CommandParameter="MacroView">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="28">
+                                            <materialDesign:PackIcon Margin="20,0"  Width="32" Height="28" Kind="SettingsSyncOutline" />
+                                            <TextBlock VerticalAlignment="Center" Text="Setting" />
+                                        </StackPanel>
+                                    </RadioButton>
+                            </StackPanel>
+                            </Grid>
+                        </Border>
+                        <!--Navigator-->
+                    </Grid>
+                    <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1">
+                        <ContentControl IsTabStop="False" Margin="8 8 8 18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                prism:RegionManager.RegionName="{x:Static core:RegionNames.ContentRegion}">
+                        </ContentControl>
+                    </ScrollViewer>
+                </Grid>
+            </Grid>
+        </Border>
+    </Window>

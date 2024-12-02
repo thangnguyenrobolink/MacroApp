@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="MacroApp.Modules.Macro.Views.MacroView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MacroApp.Modules.Macro.Views"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True" Background="#FF152026"
+             Height="900">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="NameTextBox"  Text="{Binding Filepath}" Height="50" Background="#FF386277"
+                Style="{StaticResource MaterialDesignOutlinedTextBox}" Foreground="White"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" FontSize="20"
+    VerticalAlignment="Stretch"  Margin="4"  Foreground="White" HorizontalAlignment="Center"
+    Text="Code Gốc"
+    TextWrapping="Wrap"  />
+        <TextBlock Grid.Row="1" Margin="4" Grid.Column="1"  FontSize="20" HorizontalAlignment="Center"
+    VerticalAlignment="Stretch"  Foreground="White"
+    Text="Code Đã chỉnh sửa"
+    TextWrapping="Wrap" />
+        <TextBlock Grid.Row="2" Grid.Column="0" Background="LightGray"
+            VerticalAlignment="Stretch"  Margin="4"  Foreground="Black"
+            Text="{Binding RawCode}"
+            TextWrapping="Wrap"  />
+        <TextBlock Grid.Row="2" Margin="4" Grid.Column="1"  Background="LightGray"
+            VerticalAlignment="Stretch"  Foreground="Black"
+            Text="{Binding EditedCode}"
+            TextWrapping="Wrap" />
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center">
+            <Button
+              Width="200" HorizontalAlignment="Stretch"
+              Content="Browse file" FontSize="18" Margin="6"
+              Style="{StaticResource MaterialDesignPaperSecondaryLightButton}"
+              ToolTip="Resource name: MaterialDesignPaperSecondaryLightButton" />
+            <Button
+              Width="200" HorizontalAlignment="Right"
+              Content="Save file" FontSize="18" Margin="6" 
+              Style="{StaticResource MaterialDesignRaisedLightButton}"
+              ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" />
+        </StackPanel> 
+    </Grid>
+</UserControl>
+    
